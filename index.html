@@ -249,8 +249,8 @@
     }
 
     .composer {
-      display: grid;
-      grid-template-columns: 1fr auto;
+      display: flex;
+      align-items: center;
       gap: 10px;
       padding: 12px 14px;
       border-top: 1px solid rgba(16, 169, 255, 0.16);
@@ -258,6 +258,7 @@
     }
 
     .composer input {
+      flex: 1;
       border-radius: 999px;
       border: 1px solid rgba(16, 169, 255, 0.24);
       background: rgba(3, 9, 18, 0.95);
@@ -265,6 +266,7 @@
       padding: 12px 14px;
       font-size: 0.95rem;
       outline: none;
+      min-width: 0;
     }
 
     .composer input::placeholder {
@@ -272,14 +274,24 @@
     }
 
     .send-btn {
-      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       border: none;
-      padding: 0 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
       font-weight: 800;
       color: #021016;
       background: linear-gradient(180deg, var(--accent), #00b4d4);
       cursor: pointer;
       box-shadow: 0 8px 20px rgba(0, 245, 183, 0.22);
+      flex-shrink: 0;
+    }
+
+    .send-btn::after {
+      content: '➜';
+      line-height: 1;
     }
 
     .chat-footer {
@@ -295,8 +307,8 @@
     @media (max-width: 640px) {
       body { padding: 10px; }
       .topbar { align-items: flex-start; flex-direction: column; }
-      .composer { grid-template-columns: 1fr; }
-      .send-btn { min-height: 42px; }
+      .composer { align-items: stretch; }
+      .send-btn { width: 42px; height: 42px; }
     }
   </style>
 </head>
@@ -332,7 +344,7 @@
 
       <form class="composer" id="messageForm">
         <input id="messageInput" type="text" maxlength="220" placeholder="Type a message for your partner" autocomplete="off" aria-label="Chat message" />
-        <button class="send-btn" type="submit">SEND</button>
+        <button class="send-btn" type="submit" aria-label="Send message"></button>
       </form>
 
       <div class="chat-footer">Offline Emergency Communication System</div>
